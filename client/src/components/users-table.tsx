@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {EuiBasicTable, EuiHealth} from '@elastic/eui';
-import RemoveUser from "../pages/remove-user";
+import RemoveUser from "./remove-user";
 
 export default function UsersTable(props: { users: [] }) {
     const columns = [

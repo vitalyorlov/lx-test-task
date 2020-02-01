@@ -1,21 +1,10 @@
 import React, {Fragment} from 'react';
 import {useQuery} from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import {RouteComponentProps} from '@reach/router';
-import AddUser from "./add-user";
+import AddUser from "../components/add-user";
 import UsersTable from "../components/users-table";
 import styled from "react-emotion";
-
-const GET_ALL_USERS = gql`
-    query GetAllUsers {
-        allUsers {
-            id,
-            name,
-            email,
-            status
-        }
-    }
-`;
+import {GET_ALL_USERS} from "../schema";
 
 interface UsersProps extends RouteComponentProps {}
 

@@ -3,17 +3,10 @@ import {useMutation} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import {EuiButtonIcon} from '@elastic/eui';
-
-const REMOVE_USER = gql`
-    mutation RemoveUser($id: ID!) {
-        removeUser(id: $id) {
-            id
-        }
-    }
-`;
+import {REMOVE_USER} from "../schema";
 
 interface RemoveUserProps {
-  id: string
+    id: string
 }
 
 const GET_ALL_USERS = gql`
@@ -31,11 +24,11 @@ export default function RemoveUser(props: RemoveUserProps) {
     const [removeUser, {loading, error}] = useMutation(
         REMOVE_USER,
         {
-            update(cache, { data: { removeUser } }) {
-                const { allUsers } = cache.readQuery({ query: GET_ALL_USERS }) as any;
+            update(cache, {data: {removeUser}}) {
+                const {allUsers} = cache.readQuery({query: GET_ALL_USERS}) as any;
                 cache.writeQuery({
                     query: GET_ALL_USERS,
-                    data: { allUsers: allUsers.filter(({id}: any) => id !== removeUser.id) },
+                    data: {allUsers: allUsers.filter(({id}: any) => id !== removeUser.id)},
                 });
             }
         }
@@ -46,5 +39,5 @@ export default function RemoveUser(props: RemoveUserProps) {
 
     return <EuiButtonIcon color="danger"
                           iconType="trash"
-                          onClick={() => removeUser({ variables: { id: props.id } })} />;
+                          onClick={() => removeUser({variables: {id: props.id}})}/>;
 }

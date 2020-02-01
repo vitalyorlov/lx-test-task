@@ -10,7 +10,7 @@ interface AddUserFormState {
     name: string,
     email: string,
     status: string
-};
+}
 
 export default class AddUserForm extends Component<AddUserFormProps, AddUserFormState> {
     options = [

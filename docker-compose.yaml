@@ -1,0 +1,42 @@
+version: '2.3'
+
+services:
+  backend:
+    image: backend
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    mem_limit: 1024M
+    environment:
+      NODE_ENV: development
+    restart: unless-stopped
+    networks:
+      - default_network
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/usr/src/app/server
+      - /usr/src/app/server/node_modules
+    command: npm run start
+
+  frontend:
+    image: frontend
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    mem_limit: 1024M
+    environment:
+      NODE_ENV: development
+    restart: unless-stopped
+    networks:
+      - default_network
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app/client
+      - /usr/src/app/client/node_modules
+    command: npm run start
+
+networks:
+  default_network:
+    driver: bridge
